@@ -10,7 +10,7 @@ pipeline {
                 docker build -t 35.175.138.38:8083/sb .
                 docker login -u admin -p $docker_password 35.175.138.38:8083
                 docker push 35.175.138.38:8083/sb
-               ...
+               '''
           }
         }  
       }
