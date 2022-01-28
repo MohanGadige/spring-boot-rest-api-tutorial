@@ -22,7 +22,7 @@ pipeline {
             sh '''
                    helmversion=$( helm show chart helm-sb | grep version | cut -d: -f 2 | tr -d ' ')
                    tar -czvf  helm-sb-${helmversion}.tgz helm-sb/
-                   curl -u mohan0007:$docker_password1 --upload-file helm-sb-${helmversion}.tgz -v
+                   docker push -u mohan0007:$docker_password1 --upload-file helm-sb-${helmversion}.tgz -v
                '''   
           }
         }  
