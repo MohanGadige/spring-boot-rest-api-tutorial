@@ -5,21 +5,15 @@ pipeline {
     stage("docker build & docker push"){
       steps{
         script{
-          withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
+          withCredentials([string(credentialsId: 'docker_pass1', variable: 'docker_password1')]) {
             sh '''
-                docker build -t 35.175.138.38:8083/sb .
-                docker login -u admin -p $docker_password 35.175.138.38:8083
-                docker push 35.175.138.38:8083/sb
+                docker build -t mohan0007/sb .
+                docker login -u mohan0007 -p $docker_password1 
+                docker push mohan0007/sb
                '''
           }
         }  
       }
     }
-  }
-  
-  post {
-		always {
-			mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "mohangadige7@gmail.com";  
-		}
-	}    
+  }   
 } 
