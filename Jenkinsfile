@@ -18,13 +18,7 @@ pipeline {
       steps{
         script{
           withCredentials([kubeconfigFile(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
-            dir('k8s/') {
-              sh '''
-                   minikube start
-                   kubectl apply -f deployment.yaml
-                   kubectl apply -f service.yaml
-                   kubectl apply -f k8s-dashboard.yaml
-                 '''  
+            dir('k8s/') { 
             }   
           }
         }
