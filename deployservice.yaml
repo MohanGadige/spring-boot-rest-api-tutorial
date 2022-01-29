@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-deployment
+spec:
+  minReadySeconds: 30
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: springboot-pod
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: springboot
+        image: mohan0007/sb:latest
+        ports: 
+        - containerPort: 8080
+...
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+spec:
+  selector:
+    app: webapp
+  ports:
+  - name: http
+    port: 8080
+    nodePort: 30060
+  type: NodePort
