@@ -19,7 +19,9 @@ spec:
         image: mohan0007/sb:latest
         ports: 
         - containerPort: 8080
-...
+        
+        
+---
 
 
 apiVersion: v1
