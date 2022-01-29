@@ -1,8 +1,5 @@
 pipeline {
-  agent any
-  environment{
-      VERSION = "${env.BUILD_ID}"
-  }  
+  agent any  
   stages{
     stage("docker build & docker push"){
       steps{
@@ -21,16 +18,15 @@ pipeline {
       steps{
         script{
           withCredentials([string(credentialsId: 'docker_pass1', variable: 'docker_password1')]) {
-            dir('helm-sb/') {
              sh '''
                    helmversion=$( helm show chart helm-sb | grep version | cut -d: -f 2 | tr -d ' ')
                    tar -czvf  helm-sb-${helmversion}.tgz helm-sb/
                    curl -u mohan0007:$docker_password1 https://index.docker.io/v1/repository/mohan0007/helm --upload-file helm-sb-${helmversion}.tgz -v
-            }   '''   
+               '''   
           }
         }  
       }
     }  
   }
 }
-}  
+  
