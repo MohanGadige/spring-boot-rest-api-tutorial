@@ -17,8 +17,7 @@ pipeline {
     stage("deploying application to k8s cluster"){
       steps{
         script{
-          withCredentials([kubeconfigFile(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {   
-          }
+          kubernetesDeploy(configs: "deployservice.yaml", kubeconfigId: "k8s-config")             
         }
       }
     }
