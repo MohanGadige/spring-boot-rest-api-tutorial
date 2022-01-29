@@ -1,9 +1,9 @@
 pipeline {
   agent any  
   stages{
-    stage("docker build & docker push"){
-      steps{
-        script{
+    stage("docker build & docker push") {
+      steps {
+        script {
           withCredentials([string(credentialsId: 'docker_pass1', variable: 'docker_password1')]) {
             sh '''
                 docker build -t mohan0007/sb .
@@ -14,10 +14,10 @@ pipeline {
         }  
       }
     }                
-    stage("deploying application to k8s cluster"){
-      steps{
-        script{
-          kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "k8s-config")             
+    stage("deploying application to k8s cluster") {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "k8s-config")             
         }
       }
     }
