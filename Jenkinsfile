@@ -13,20 +13,15 @@ pipeline {
           }
         }  
       }
-    }                 
-    stage("pushing helm charts to dockerhub"){
+    }                
+    stage("deploying application to k8s cluster"){
       steps{
         script{
-          withCredentials([string(credentialsId: 'docker_pass1', variable: 'docker_password1')]) {
-             sh '''
-                   helmversion=$( helm show chart helm-sb | grep version | cut -d: -f 2 | tr -d ' ')
-                   tar -czvf  helm-sb-${helmversion}.tgz helm-sb/
-                   curl -u mohan0007:$docker_password1 https://index.docker.io/v1/repository/mohan0007/helm --upload-file helm-sb-${helmversion}.tgz -v
-               '''   
-          }
-        }  
-      }
-    }  
+          withCredentials([kubeconfigFile(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
+              sh '
+    
+          }   
+          
   }
 }
   
