@@ -19,7 +19,7 @@ pipeline {
         script {  
             kubernetesDeploy(
             configs: 'deploymentservice.yml',
-            kubeconfigId: 'K8s-config',
+            credentialsId: 'K8s-config',
             enableConfigSubstitution: true)            
         }
       }
