@@ -17,7 +17,7 @@ pipeline {
     stage("deploying application to k8s cluster") {
       steps {
         script {
-          kubernetesDeploy configs: 'deploymentservice.yml', kubeConfig: [path: '/root/kube/config'], kubeconfigId: 'k8s-config', serverUrl: 'https://192.168.49.2:8443']
+          kubernetesDeploy configs: 'deploymentservice.yml', kubeConfig: [path: '/root/kube/config'], kubeconfigId: 'k8s-config'
         }
       }
     }
